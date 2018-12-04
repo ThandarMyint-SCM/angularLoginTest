@@ -1,21 +1,33 @@
 <div ng-controller="studentListController" ng-init="init()">
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
-	  <a class="navbar-brand" href="#">Student Information</a>
+	  <a class="navbar-brand" href="#home">Student Information</a>
 	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
 	    <span class="navbar-toggler-icon"></span>
 	  </button>
 	  <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 	    <div class="navbar-nav">
-	      <a class="nav-item nav-link active" href="#home">Home</a>
-	      <a class="nav-item nav-link" href="#studentList">Student List <span class="sr-only">(current)</span></a>
+	      <a class="nav-item nav-link" href="#home">Home</a>
+	      <a class="nav-item nav-link active" href="#studentList" ng-show="{{isAdmin}}">Student List <span class="sr-only">(current)</span></a>
 	      <a class="nav-item nav-link" href="#studentMark">Student's Mark</a>
-	      <a class="nav-item nav-link float-right" href="#logout">Logout</a>
+	      <a class="nav-item nav-link float-right" href="#login">Logout</a>
 	    </div>
 	  </div>
 	</nav>
 	<div class="container">
-	  <div class="jumbotron">
-	    <h1 class="text-center">Welcome <strong class="text-success">{{user}} List</strong></h1>
-	  </div>
+	    <h1 class="text-center"><strong class="text-success">Student List</strong></h1>
+         <table class="table table-dark">
+		 	<thead>
+			    <tr>
+			      <th scope="col">Name</th>
+			      <th scope="col">Roll No</th>
+			    </tr>
+		 	</thead>
+		 	<tbody>
+			    <tr ng-repeat = "student in students">
+	               <td>{{ student.name }}</td>
+	               <td>{{ student.rollNo }}</td>
+	            </tr>
+		  	</tbody>
+		</table>
 	</div>
 </div>

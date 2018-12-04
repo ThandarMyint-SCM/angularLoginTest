@@ -1,15 +1,16 @@
-mainApp.controller('studentListController', function($scope, $cookies, ShareService, $location) {
-	$scope.user = $cookies.username;
-	$scope.passwrord = $cookies.password;
-	var isAuthenticated = false;
+mainApp.controller('studentListController', function($scope, $location, DataService) {
+	$scope.isAdmin = false;
 	$scope.init = function() {
-		isAuthenticated = ShareService.auth($scope.user, $scope.password);
-		alert(isAuthenticated);
-		if (isAuthenticated === false) {
-			$location.path('/login');
-		}
-		else {
-			console.log("Success");
-		}
+			getStudentList();
+			$scope.isAdmin = DataService.isAdmin();
+			if (!$scope.isAdmin) {
+				alert("Can't go to StudentList page.")
+				$location.path('/home');
+			}
+	};
+	function getStudentList() {
+		DataService.getData(function(data) {
+            $scope.students = data;
+        });
 	}
 });
